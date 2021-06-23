@@ -193,7 +193,6 @@ X = train_data_v1.iloc[:,2:]
 y = train_data_v1.iloc[:,1:2]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
 
-
 # Training the models
 
 # Logit model
