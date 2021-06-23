@@ -16,12 +16,10 @@ This repository contains all the files of the kaggle competition, related to Tit
     - [Group Variables](#group-categories)
     - [Weight of Evidence](#weight-of-evidence)
   - [3. Modeling](#3-modeling)
-    - [Train & Validation Split](#TVS)
-    - [Train Multiple Models](#TMM)
-    - [Model Selection](#MS)
-  - [4. Scoring](#SC)
-    - [Test Data Processing](#TDP)
-    - [Final Predictions](#FP)
+    - [Train & Validation Split](#train-and-validation-split)
+    - [Train Multiple Models](#train-multiple-models)
+    - [Model Selection](#model-selection)
+  - [4. Scoring](#4scoring)
   
 ## Overview
 The RMS Titanic sank in the early morning hours of ```15 April 1912``` in the North Atlantic Ocean, four days into her maiden voyage from Southampton to New York City. Though this is a disaster, we can use this data to ```learn how to handle such events in the future.```
@@ -96,6 +94,41 @@ All = 610 || Goods = 160 || Bads = 450 | All = 390 || Goods = 140 || Bads = 250
 }
 ```
 ### 3. Modeling
+We have `cleaned` the data and `derived` some variables so that we can make better predictions. So let us `predict` now. But we need to follow some steps to make a robust model and `avoid over-fitting` the data.
+
+#### Train and Validation Split
+The training data will be `randomly` split into `70:30` ratio into `training` and `validation` datasets. We now use the first one to train our model, and the validation data to validate our model's accuracy.
+#### Train Multiple Models
+I have explored `six` different techniques to train the model. Click on the links for literature review.
+- [Logistic Regression](https://www.analyticsvidhya.com/blog/2021/03/logistic-regression/)
+- [Support Vector Machines](https://www.analyticsvidhya.com/blog/2017/09/understaing-support-vector-machine-example-code/)
+- [Decision Trees](https://www.analyticsvidhya.com/blog/2016/04/tree-based-algorithms-complete-tutorial-scratch-in-python/)
+- [Random Forest](https://www.analyticsvidhya.com/blog/2021/03/introduction-to-random-forest-and-its-hyper-parameters/)
+- [Light Gradient Boosting](https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/)
+- [Extreme Gradient Boosting](https://www.analyticsvidhya.com/blog/2017/06/which-algorithm-takes-the-crown-light-gbm-vs-xgboost/)
+#### Model Selection
+The performance of the above models can be judged based on the validation dataset. The results are below, so my best model is Light GBM.
+```python
+{
+"""
+Logit model validation Accuracy: 82.46%
+SVM model validation Accuracy: 82.84%
+DT model validation Accuracy: 83.58%
+RF model validation Accuracy: 83.58%
+LGB model validation Accuracy: 85.82%
+XGB model validation Accuracy: 82.84%  
+""" 
+}
+```
+### 4.Scoring
+We now have a model, trained and validated. Recollect that we have been provided a `test` dataset to make predictions for the `future`. So we perform the same `data-preprocessing` steps on this as well and predict the `Survived` column. But, for this we can `train` our model on the `whole training` dataset and again and use that model so that we have more data to train our model.
+
+We now `submit` the predictions and the `leaderboard score` tells the accuracy we have obtained on the test data. This whole modeling process is an `iterative` one because a `huge number parameters` are involved in the whole lifecycle.
+
+This project has been a great starting point for me. Hopefully it is the same for the readers as well. Thanks!
+
+
+
 
 
 
