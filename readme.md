@@ -8,10 +8,11 @@ This repository contains all the files of the kaggle competition, related to Tit
 The RMS Titanic sank in the early morning hours of ```15 April 1912``` in the North Atlantic Ocean, four days into her maiden voyage from Southampton to New York City. Though this is a disaster, we can use this data to ```learn how to handle such events in the future.```
 
 ## Data Dictionary
-## Data Dictionary
-
-
-
-- We have been provided with a Train (891 x 12) & Test datasets
-
+- We have been provided with a ```Train (891 x 12)``` & ```Test (418 x 11)``` datasets
+- The dependant variable is `````"Survived"`````
+![Data Dictionary](images/Data Dictionary.JPG)
+  
+## Variable Descriptions
+- We can see the ```variable descriptions``` below
+![Variables](images/Variable Notes.JPG)
 
