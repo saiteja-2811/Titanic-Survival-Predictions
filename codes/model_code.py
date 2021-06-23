@@ -29,11 +29,11 @@ import sklearn.metrics as mt
 # ------------------------------#
 
 # Importing the Data
-train_data = pd.read_csv("data/train.csv")
+train_data = pd.read_csv("../../data/train.csv")
 # Get the profile report - saved this in the outputs folder as output.html
 from pandas_profiling import ProfileReport
 profile = ProfileReport(train_data,explorative=True)
-profile.to_file('outputs/output.html')
+profile.to_file('../../outputs/EDA.html')
 
 # ------------------------#
 #   Data Pre Processing   #
@@ -272,7 +272,7 @@ print("XGB model validation Accuracy: {:.2f}%".format(acc_XGB*100))
 #   Repeating all the Data Processing for the test data     #
 # ----------------------------------------------------------#
 #Importing the Data
-test_data = pd.read_csv("data/test.csv")
+test_data = pd.read_csv("../../data/test.csv")
 # Dropping Cabin - Missing Values
 test_data.drop(['Cabin'],axis=1,inplace=True)
 # Dropping Fare - High Correlation with Pclass & Ambiguous Variable
@@ -330,4 +330,4 @@ Out = Out.rename(columns={0:'Survived'})
 # ------------------------#
 #   Final predictions     #
 # ------------------------#
-Out[['PassengerId','Survived']].to_csv("outputs/LGB_Submission.csv",index=False)
+Out[['PassengerId','Survived']].to_csv("../../outputs/LGB_Submission.csv",index=False)
