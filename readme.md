@@ -8,10 +8,10 @@ This repository contains all the files of the kaggle competition, related to Tit
 - [Data Dictionary](#data-dictionary)
 - [Variable Descriptions](#variable-descriptions)
 - [Methodology](#methodology)
-  - [1. Data Processing](#data-pre-processing)
-    - [Feature Elimination](#1-feature-elimination)
-    - [Missing Value Imputation](#2-missing-value-imputations-mvi)
-  - [2. Feature Engineering](#)
+  - [1. Data Processing](#1-data-pre-processing)
+    - [Feature Elimination](#feature-elimination)
+    - [Missing Value Imputation](#missing-value-imputations-mvi)
+  - [2. Feature Engineering](#2-feature-engineering)
     - [Name Analysis](#NA)
     - [Group Variables](#GV)
     - [Weight of Evidence](#WOE)
@@ -37,16 +37,65 @@ We can see the ```variable descriptions``` below
 ## Methodology
 Now that we have understood what the problem statement is, let us follow a methodology to solve this. 
 
-### Data Pre Processing
+### 1. Data Pre Processing
 Let us check for the ```missing values``` for each variable first, and then we will impute them with the appropriate methods. 
 ![Missing](images/Missing_Train.PNG)
 
-#### 1. Feature Elimination
+#### Feature Elimination
 - Drop ```cabin``` variable due to high missing percentage
 - Drop ```fare``` because of **high correlation** with ```PClass```
 - Drop ```Ticket``` variable due to low value addition
-#### 2. Missing Value Imputations (MVI)
-We have already dropped the ```cabin``` variable, so we have to impute the ```Age``` and ```Embarked``` variables. Age is a continuous variable and its distribution is below.
+#### Missing Value Imputations (MVI)
+We have already dropped the ```cabin``` variable, so we have to impute the ```Age``` and ```Embarked``` variables. Age is a continuous variable and its distribution is below. From the figure we can say that ```Age``` is skewed.
 ![Age](images/Age_Dist.PNG)
+
+I have used the median value of ```Age``` for a `passenger class` and `gender` to impute the missing values.
+
+### 2. Feature Engineering
+This is an import aspect of the methodology, because this is where the business intuition and domain expertise come in. And we all know how crucial these two are to make better predictions and to interpret the results of the model.  
+
+#### Name Analysis
+Though this variable `might not look important` at first, but we can extract some `hidden information` from this i.e., we can get the `Title` of each passenger and analyze if some `titles` have high survival probability. We have `Capt`, `Col`, `Don`, `Dr`, `Jonkheer`, `Lady`, `Major`, `Rev`, `Sir`, `the Countess`, `Miss`, and `Mrs`
+#### Group Categories
+I have now `grouped some categories` together because they have the `same event rates` i.e., `same probability of survival`.
+#### Weight of Evidence
+These categories have string values, so we need to convert them to numerical values but with the same degrees of freedom. So we use `Weight of Evidence` approach to accomplish this. 
+##### What is Weight of Evidence (WOE)?
+The weight of evidence tells the `predictive power` of an independent variable in relation to the dependent variable. It is generally described as a measure of the `separation of goods (Survived = 1)` and `bads (Survived = 0)`. We use the below formula to calculate the WOE and I have also provided a sample example for explanation purposes.
+
+![WOE](images/woe.png)
+
+#### WOE Calculation for a variable with values `Category 1` & `Category 2`
+```python
+{
+"""
+#---------------------#
+#   WOE & IV Example  #
+#---------------------#
+
+#-------------------#
+#   Total           #
+#-------------------#                       
+Total Rows = 1000 || Total Goods = 300 || Total Bads = 700
+
+#-------------------#                  |       #-------------------#
+#   Category 1      #                  |       #   Category 2      #
+#-------------------#                  |       #-------------------# 
+All = 610 || Goods = 160 || Bads = 450 | All = 390 || Goods = 140 || Bads = 250
+
+#--------------#
+#   WOE & IV 1 #
+#--------------#    
+%Goods = (160/300) & %Bads = (450/700) => WOE 1 = ln(%Goods / %Bads) => IV 1 = WOE 1 * (%Goods - %Bads)
+
+#--------------#
+#   WOE & IV 2 #
+#--------------#    
+%Goods = (140/300) & %Bads = (250/700) => WOE 2 = ln(%Goods / %Bads) => IV 2 = WOE 2 * (%Goods - %Bads)
+"""
+}
+```
+### 3. Modeling
+
 
 
