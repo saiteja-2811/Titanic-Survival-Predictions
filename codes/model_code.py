@@ -28,7 +28,7 @@ import sklearn.metrics as mt
 #   Exploratory Data Analysis   #
 # ------------------------------#
 
-#Importing the Data
+# Importing the Data
 train_data = pd.read_csv("data/train.csv")
 # Get the profile report - saved this in the outputs folder as output.html
 from pandas_profiling import ProfileReport
@@ -164,7 +164,7 @@ def calc_iv(df, feature, target):
     data = data.drop(['Variable', 'All', 'Goods', 'Bads','%Goods','%Bads','IV'], axis=1)
     return data
 
-#WOE for multiple features
+# WOE for multiple features
 def woe_imp(df1, feature, target, woe_feature):
     df2 = calc_iv(df1, feature, target)
     df1 = df1.merge(df2, left_on= feature, right_on='Value', how='left')
@@ -328,7 +328,6 @@ test_data_y = pd.DataFrame(LGB_result.predict(test_data_v1.iloc[:,1:]))
 Out = pd.merge(test_data_y,test_data_v1,left_index = True,right_index=True,how='left')
 Out = Out.rename(columns={0:'Survived'})
 
-# # Final Predictions
 # ------------------------#
 #   Final predictions     #
 # ------------------------#
