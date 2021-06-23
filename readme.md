@@ -11,10 +11,10 @@ The RMS Titanic sank in the early morning hours of ```15 April 1912``` in the No
 - We have been provided with a ```Train (891 x 12)``` & ```Test (418 x 11)``` datasets
 - The dependant variable is `````"Survived"`````
 
-![Data Dictionary](images/Data Dictionary.JPG)
+![Data Dictionary]("images/Data Dictionary.JPG")
   
 ## Variable Descriptions
 - We can see the ```variable descriptions``` below
 
-![Variables](images/Variable Notes.JPG)
+![Variables]("images/Variable Notes.JPG")
 
